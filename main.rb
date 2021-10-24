@@ -38,10 +38,16 @@ def play(answer)
     when "S"
       player_rps = "Scissors"
     else
+      player_rps = "Error"
+    end
+    if player_rps != "Error"
+      puts evaluate(player_rps, computer_rps)
+      puts get_scores()
+    else
       puts "Error! you have enter something else than R, P or S"
     end
-    puts evaluate(player_rps, computer_rps)
-    puts get_scores()
+    puts "Do you want to play again? y/Y or n/N"
+    answer = gets.chomp
   end
   puts "Thank you, bye!"
 end  #end of play method
@@ -92,9 +98,7 @@ def evaluate(player, computer)
 end # end of evaluate method
 
 setup()
-ready = "y"
-until ready.downcase != "y"
-  puts "Are you ready to play? type (y or Y) for yes AND n or N for no."
-  ready = gets.chomp
-  play(ready)
-end
+
+puts "Are you ready to play? type (y or Y) for yes AND n or N for no."
+ready = gets.chomp
+play(ready)
