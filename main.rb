@@ -8,7 +8,7 @@ $scores = { $player1_name.to_sym => $player1_score,
            $player2_name.to_sym => $player2_score}
 $rps = ['Rock', 'Paper', 'Scissors']
 
-# END OF GLOBALM VARIABLES
+# END OF GLOBAL VARIABLES
 
 def setup
   puts "Hello and welcome to Ruby RPS! Player 1, Please enter your name"
