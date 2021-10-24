@@ -18,7 +18,7 @@ def setup
 end
 
 def get_scores
-  return `#{scores} your score is: #{player1_score} and #{player2_name} your score is: #{player2_score}.`
+  return scores.each { |key, value| puts `#{key.to_s} your score is: #{value}`  }
 end # end of setup method
 
 def play(answer)
@@ -28,9 +28,31 @@ def play(answer)
     computer_rps = rps[Random.new(3)]
     puts "Please enter 'R' for Rock, 'P' for Paper or 'S' for Scissors:"
     player_rps = gets.chomp
-    evaluate(player_rps, computer_rps)
+    player_rps.upcase!
+    case player_rps
+    when "R"
+      player_rps = "Rock"
+    when "P"
+      player_rps = "Paper"
+    when "S"
+      player_rps = "Scissors"
+    else
+      puts "Error! you have enter something else than R, P or S"
+    end
+    winner = evaluate(player_rps, computer_rps)
+    get_scores()
   end
 end  #end of play method
 
 def evaluate(player, computer)
+  # `#{scores.key scores[:player1_name]} wins!`
+  if player == computer
+    return "It's a draw!"
+  elsif player == "Rock"
+    if computer == "Paper"
+      return "Computer wins!"
+    else
+      return `#{scores.key scores[:player1_name]} wins!`
+    end
+  end
 end # end of evaluate method
