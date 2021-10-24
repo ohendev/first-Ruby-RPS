@@ -53,32 +53,43 @@ def evaluate(player, computer)
   else
     if player == "Rock"
       if computer == "Paper"
-        $score[:player2_name] += 1
+        score = $scores[:player2_name].to_i
+        score += 1
+        $scores[:player2_name] = score
         return "Computer wins!"
       else
-        $score[:player1_name] += 1
-        return "#{$scores.key $score.fetch(:player1_name)} wins!"
+        score = $scores[:player1_name].to_i
+        score += 1
+        $scores[:player1_name] = score
+        return "#{$scores.key $scores.fetch(:player1_name)} wins!"
       end
     elsif player == "Paper"
       if computer == "Scissors"
-        $score[:player2_name] += 1
+        score = $scores[:player2_name].to_i
+        score += 1
+        $scores[:player2_name] = score
         return "Computer wins!"
       else
-        $score[:player1_name] += 1
-        return "#{$scores.key $score.fetch(:player1_name)} wins!"
+        score = $scores[:player1_name].to_i
+        score += 1
+        $scores[:player1_name] = score
+        return "#{$scores.key $scores.fetch(:player1_name)} wins!"
       end
     else
       if computer == "Rock"
-        $score[:player2_name] += 1
+        score = $scores[:player2_name].to_i
+        score += 1
+        $scores[:player2_name] = score
         return "Computer wins!"
       else
-        $score[:player1_name] += 1
-        return "#{$scores.key $score.fetch(:player1_name)} wins!"
+        score = $scores[:player1_name].to_i
+        score += 1
+        $scores[:player1_name] = score
+        return "#{$scores.key $scores.fetch(:player1_name)} wins!"
       end
     end
   end
 end # end of evaluate method
-
 
 setup()
 ready = "y"
