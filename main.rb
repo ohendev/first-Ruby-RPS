@@ -18,7 +18,7 @@ def setup
 end
 
 def get_scores
-  return scores.each { |key, value| puts `#{key.to_s} your score is: #{value}`  }
+  return scores.each { |key, value| `#{key.to_s} your score is: #{value}`  }
 end # end of setup method
 
 def play(answer)
@@ -39,8 +39,8 @@ def play(answer)
     else
       puts "Error! you have enter something else than R, P or S"
     end
-    winner = evaluate(player_rps, computer_rps)
-    get_scores()
+    puts evaluate(player_rps, computer_rps)
+    puts get_scores()
   end
 end  #end of play method
 
@@ -48,11 +48,25 @@ def evaluate(player, computer)
   # `#{scores.key scores[:player1_name]} wins!`
   if player == computer
     return "It's a draw!"
-  elsif player == "Rock"
-    if computer == "Paper"
-      return "Computer wins!"
+  else
+    if player == "Rock"
+      if computer == "Paper"
+        return "Computer wins!"
+      else
+        return `#{scores.key scores[:player1_name]} wins!`
+      end
+    elsif player == "Paper"
+      if computer == "Scissors"
+        return "Computer wins!"
+      else
+        return `#{scores.key scores[:player1_name]} wins!`
+      end
     else
-      return `#{scores.key scores[:player1_name]} wins!`
+      if computer == "Rock"
+        return "Computer wins!"
+      else
+        return `#{scores.key scores[:player1_name]} wins!`
+      end
     end
   end
 end # end of evaluate method
