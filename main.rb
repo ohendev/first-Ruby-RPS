@@ -1,31 +1,32 @@
 # GLOBAL VARIABLES HERE:
 
-player1_name = 'player1'
-player2_name = 'Computer'
-player1_score = 0
-player2_score = 0
-scores = { player1_name.to_sym => player1_score,
-           player2_name.to_sym => player2_score}
-rps = ['Rock', 'Paper', 'Scissors']
+$player1_name = 'player1'
+$player2_name = 'Computer'
+$player1_score = 0
+$player2_score = 0
+$scores = { $player1_name.to_sym => $player1_score,
+           $player2_name.to_sym => $player2_score}
+$rps = ['Rock', 'Paper', 'Scissors']
 
 # END OF GLOBALM VARIABLES
 
 def setup
   puts "Hello and welcome to Ruby RPS! Player 1, Please enter your name"
   player_name = gets.chomp
-  puts `Cool #{player_name}, you're going to play against the Computer`
-  scores[player_name.to_sym] = scores.delete :player1
+  #scores[player_name.to_sym] = scores.delete :player1
+  puts "Cool #{player_name}, you are going to play against the Computer"
 end
 
 def get_scores
-  return scores.each { |key, value| `#{key.to_s} your score is: #{value}`  }
+  return $scores.each { |key, value| "#{key.to_s} your score is: #{value}"  }
 end # end of setup method
 
 def play(answer)
-  until answer.downcase != "no"
-    puts `#{player1_name}, I assume that you already know the rules ;)`
+  until answer.downcase != "y"
+    puts "#{$scores[:player1_name]}, I assume that you already know the rules ;)"
     puts "Let's go!"
-    computer_rps = rps[Random.new(3)]
+    r = rand(3)
+    computer_rps = $rps[r]
     puts "Please enter 'R' for Rock, 'P' for Paper or 'S' for Scissors:"
     player_rps = gets.chomp
     player_rps.upcase!
@@ -42,6 +43,7 @@ def play(answer)
     puts evaluate(player_rps, computer_rps)
     puts get_scores()
   end
+  puts "Thank you, bye!"
 end  #end of play method
 
 def evaluate(player, computer)
@@ -51,22 +53,37 @@ def evaluate(player, computer)
   else
     if player == "Rock"
       if computer == "Paper"
+        $score[:player2_name] += 1
         return "Computer wins!"
       else
-        return `#{scores.key scores[:player1_name]} wins!`
+        $score[:player1_name] += 1
+        return "#{$scores.key $score.fetch(:player1_name)} wins!"
       end
     elsif player == "Paper"
       if computer == "Scissors"
+        $score[:player2_name] += 1
         return "Computer wins!"
       else
-        return `#{scores.key scores[:player1_name]} wins!`
+        $score[:player1_name] += 1
+        return "#{$scores.key $score.fetch(:player1_name)} wins!"
       end
     else
       if computer == "Rock"
+        $score[:player2_name] += 1
         return "Computer wins!"
       else
-        return `#{scores.key scores[:player1_name]} wins!`
+        $score[:player1_name] += 1
+        return "#{$scores.key $score.fetch(:player1_name)} wins!"
       end
     end
   end
 end # end of evaluate method
+
+
+setup()
+ready = "y"
+until ready.downcase != "y"
+  puts "Are you ready to play? type (y or Y) for yes AND n or N for no."
+  ready = gets.chomp
+  play(ready)
+end
